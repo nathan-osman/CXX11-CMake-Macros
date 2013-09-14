@@ -18,26 +18,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-# Ensures that the compiler supports C++11
-macro(require_cxx11_compiler)
-    # Microsoft Visual C++ 2010+ is required
-    if(MSVC)
-        if(NOT MSVC10)
-            message(FATAL_ERROR "Visual C++ 2010+ is required (${MSVC_VERSION} detected).")
-        endif()
-    # GCC 4.6+ is required
-    elseif(CMAKE_COMPILER_IS_GNUCXX)
-        if(${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 4.6)
-            message(FATAL_ERROR "GCC 4.6+ is required (${CMAKE_CXX_COMPILER_VERSION} detected).")
-        endif()
-    # Clang 3.1+ is required
-    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-        if(${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 3.1)
-            message(FATAL_ERROR "Clang 3.1+ is required (${CMAKE_CXX_COMPILER_VERSION} detected).")
-        endif()
-    # Assume that the compiler does not support C++11
-    else()
-        message(FATAL_ERROR "${CMAKE_CXX_COMPILER_ID} does not appear to support C++11.")
+# Determines whether or not the compiler supports C++11
+macro(check_for_cxx11_compiler _VAR)
+    set(${_VAR})
+    if((MSVC AND MSVC10) OR
+       (CMAKE_COMPILER_IS_GNUCXX AND NOT ${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 4.6) OR
+       (CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND NOT ${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 3.1))
+        set(${_VAR} 1)
     endif()
 endmacro()
 
