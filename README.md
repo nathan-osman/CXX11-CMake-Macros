@@ -4,11 +4,14 @@ The macros included in `CXX11.cmake` can be used for checking for and enabling C
 
 ### Documentation
 
-* **`check_for_cxx11_compiler`** - determines whether the current compiler supports C++11
+The usage of the macros is described below:
 
-  Parameters:
-  
-  `VAR` - *a variable that will be set to 1 if the compiler supports C++11*
+* **check_for_cxx11_compiler(VAR)**  
+   *determines whether the current compiler supports C++11*
+ 
+   Parameters:
+   - a variable that will be set to 1 if the compiler supports C++11
 
-* **`enable_cxx11`** - sets the appropriate compiler flags to enable C++11
+* **enable_cxx11()**  
+   *sets the appropriate compiler flags to enable C++11*
 
