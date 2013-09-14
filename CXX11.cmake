@@ -20,11 +20,15 @@
 
 # Determines whether or not the compiler supports C++11
 macro(check_for_cxx11_compiler _VAR)
+    message(STATUS "Checking for C++11 compiler")
     set(${_VAR})
     if((MSVC AND MSVC10) OR
        (CMAKE_COMPILER_IS_GNUCXX AND NOT ${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 4.6) OR
        (CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND NOT ${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 3.1))
         set(${_VAR} 1)
+        message(STATUS "Checking for C++11 compiler - available")
+    else()
+        message(STATUS "Checking for C++11 compiler - unavailable")
     endif()
 endmacro()
 
